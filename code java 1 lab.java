@@ -1,26 +1,24 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("\n      ЗАВДАННЯ ВАРІАНТУ 4:");
-            System.out.println("1. Завдання 1 (Обчислення виразу в 3 форматах)");
-            System.out.println("2. Завдання 2 (Масив A(2n) та середня сума)");
-            System.out.println("3. Завдання 3 (Матриця A(n,n) -> Вектор B(n))");
-            System.out.println("4. Завдання 4 (Обробка тексту: вилучення першої літери)");
+            System.out.println("\n      ЗАВДАННЯ:");
+            System.out.println("1. Завдання 1 (Варіант 9: Обчислення виразу)");
+            System.out.println("2. Завдання 2 (Варіант 10: Симетрична різниця масивів A і B)");
+            System.out.println("3. Завдання 3 (Варіант 3: Перестановка max елемента в A[0][0])");
+            System.out.println("4. Завдання 4 (Варіант 4: Обробка тексту)");
             System.out.println("0. Вихід");
             System.out.print("Ваш вибір: ");
 
-            if (!scanner.hasNextInt()) {
-                System.out.println("Введіть число!");
-                scanner.next();
-                continue;
-            }
-
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Очищення буфера
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -45,130 +43,139 @@ public class Main {
         }
     }
 
-    // ЗАВДАННЯ 1: Обчислення виразу
+    // ЗАВДАННЯ 1 (Варіант 9)
     public static void runTask1(Scanner scanner) {
-        System.out.println("\n ЗАВДАННЯ 1 ");
+        System.out.println("\n--- ЗАВДАННЯ 1 (Варіант 9) ---");
         
         System.out.println("1) Вхідні дані: double, Результат: double");
-        System.out.print("Введіть a (double): ");
-        double a1 = scanner.nextDouble();
-        System.out.print("Введіть b (double): ");
-        double b1 = scanner.nextDouble();
-        double denom1 = Math.pow(b1, 4) + Math.pow(a1, 3);
-        if (denom1 == 0) {
-            System.out.println("Помилка: Ділення на нуль!");
-        } else {
-            double res1 = (a1 * b1 - (a1 + b1) * (a1 - b1)) / denom1 + 5 * b1;
-            System.out.println("Результат: " + res1);
-        }
+        System.out.print("Введіть n (double): ");
+        double n1 = scanner.nextDouble();
+        System.out.print("Введіть m (double): ");
+        double m1 = scanner.nextDouble();
+        double res1 = ((n1 + 1) * (m1 - 4) + n1 * m1 - Math.pow(n1, 4) + Math.pow(m1, 3)) / Math.pow(m1 + 2, 2);
+        System.out.println("Результат: " + res1);
 
         System.out.println("\n2) Вхідні дані: int, Результат: double");
-        System.out.print("Введіть a (int): ");
-        int a2 = scanner.nextInt();
-        System.out.print("Введіть b (int): ");
-        int b2 = scanner.nextInt();
-        double denom2 = Math.pow(b2, 4) + Math.pow(a2, 3);
-        if (denom2 == 0) {
-            System.out.println("Помилка: Ділення на нуль!");
-        } else {
-            double res2 = (double) (a2 * b2 - (a2 + b2) * (a2 - b2)) / denom2 + 5 * b2;
-            System.out.println("Результат: " + res2);
-        }
+        System.out.print("Введіть n (int): ");
+        int n2 = scanner.nextInt();
+        System.out.print("Введіть m (int): ");
+        int m2 = scanner.nextInt();
+        double res2 = (double) ((n2 + 1) * (m2 - 4) + n2 * m2 - Math.pow(n2, 4) + Math.pow(m2, 3)) / Math.pow(m2 + 2, 2);
+        System.out.println("Результат: " + res2);
 
         System.out.println("\n3) Вхідні дані: double, Результат: int");
-        System.out.print("Введіть a (double): ");
-        double a3 = scanner.nextDouble();
-        System.out.print("Введіть b (double): ");
-        double b3 = scanner.nextDouble();
-        double denom3 = Math.pow(b3, 4) + Math.pow(a3, 3);
-        if (denom3 == 0) {
-            System.out.println("Помилка: Ділення на нуль!");
-        } else {
-            int res3 = (int) ((a3 * b3 - (a3 + b3) * (a3 - b3)) / denom3 + 5 * b3);
-            System.out.println("Результат: " + res3);
-        }
+        System.out.print("Введіть n (double): ");
+        double n3 = scanner.nextDouble();
+        System.out.print("Введіть m (double): ");
+        double m3 = scanner.nextDouble();
+        int res3 = (int) (((n3 + 1) * (m3 - 4) + n3 * m3 - Math.pow(n3, 4) + Math.pow(m3, 3)) / Math.pow(m3 + 2, 2));
+        System.out.println("Результат: " + res3);
     }
 
-    // ЗАВДАННЯ 2: Обробка одномірного масиву
+    // ЗАВДАННЯ 2 (Варіант 10)
     public static void runTask2(Scanner scanner) {
-        System.out.println("\n ЗАВДАННЯ 2 ");
-        System.out.print("Введіть n (n <= 200, розмір масиву буде 2n): ");
+        System.out.println("\n--- ЗАВДАННЯ 2 (Варіант 10) ---");
+        System.out.print("Введіть розмір масиву A (n <= 400): ");
         int n = scanner.nextInt();
-        if (n <= 0) {
-            System.out.println("n має бути більше 0.");
-            return;
-        }
-
-        double[] A = new double[2 * n];
-        System.out.println("Введіть " + (2 * n) + " елементів масиву:");
-        for (int i = 0; i < 2 * n; i++) {
-            System.out.print("A[" + (i + 1) + "] = ");
-            A[i] = scanner.nextDouble();
-        }
-
-        double sumFirstHalf = 0;
+        int[] A = new int[n];
+        System.out.println("Введіть елементи масиву A:");
         for (int i = 0; i < n; i++) {
-            sumFirstHalf += A[i];
+            A[i] = scanner.nextInt();
         }
-        double averageFirstHalf = sumFirstHalf / n;
-        System.out.println("Середнє арифметичне першої половини A(1)...A(n): " + averageFirstHalf);
 
-        double sumSecondHalf = 0;
-        int count = 0;
-        for (int i = n; i < 2 * n; i++) {
-            if (A[i] > averageFirstHalf) {
-                sumSecondHalf += A[i];
-                count++;
+        System.out.print("Введіть розмір масиву B (m <= 200): ");
+        int m = scanner.nextInt();
+        int[] B = new int[m];
+        System.out.println("Введіть елементи масиву B:");
+        for (int i = 0; i < m; i++) {
+            B[i] = scanner.nextInt();
+        }
+
+        Set<Integer> setA = new HashSet<>();
+        for (int val : A) setA.add(val);
+
+        Set<Integer> setB = new HashSet<>();
+        for (int val : B) setB.add(val);
+
+        List<Integer> listC = new ArrayList<>();
+
+        for (int val : setA) {
+            if (!setB.contains(val)) {
+                listC.add(val);
+            }
+        }
+        for (int val : setB) {
+            if (!setA.contains(val)) {
+                listC.add(val);
             }
         }
 
-        System.out.println("Сума елементів другої половини A(n+1)...A(2n), що > " + averageFirstHalf + ": " + sumSecondHalf);
-        System.out.println("Кількість таких елементів: " + count);
+        int[] C = new int[listC.size()];
+        for (int i = 0; i < listC.size(); i++) {
+            C[i] = listC.get(i);
+        }
+
+        System.out.println("\nСиметрична різниця (Масив C):");
+        for (int val : C) {
+            System.out.print(val + " ");
+        }
+        System.out.println();
     }
 
-    // ЗАВДАННЯ 3: Двовимірний масив
+    // ЗАВДАННЯ 3 (Варіант 3)
     public static void runTask3(Scanner scanner) {
-        System.out.println("\n ЗАВДАННЯ 3 ");
+        System.out.println("\n--- ЗАВДАННЯ 3 (Варіант 3) ---");
         System.out.print("Введіть розмірність квадратної матриці n (n <= 20): ");
         int n = scanner.nextInt();
 
         double[][] A = new double[n][n];
         System.out.println("Введіть елементи матриці A:");
+        int maxRow = 0, maxCol = 0;
+        double maxVal = Double.NEGATIVE_INFINITY;
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 System.out.print("A[" + i + "][" + j + "] = ");
                 A[i][j] = scanner.nextDouble();
+                if (A[i][j] > maxVal) {
+                    maxVal = A[i][j];
+                    maxRow = i;
+                    maxCol = j;
+                }
             }
         }
 
-        double[] B = new double[n];
-        for (int i = 0; i < n; i++) {
-            double rowSum = 0;
+        // Перестановка рядка maxRow з 0-м рядком
+        if (maxRow != 0) {
             for (int j = 0; j < n; j++) {
-                rowSum += A[i][j];
+                double temp = A[0][j];
+                A[0][j] = A[maxRow][j];
+                A[maxRow][j] = temp;
             }
-            B[i] = rowSum / n;
         }
 
-        System.out.println("\nПочаткова матриця A:");
+        // Перестановка стовпчика maxCol з 0-м стовпчиком
+        if (maxCol != 0) {
+            for (int i = 0; i < n; i++) {
+                double temp = A[i][0];
+                A[i][0] = A[i][maxCol];
+                A[i][maxCol] = temp;
+            }
+        }
+
+        System.out.println("\nПеретворена матриця A (максимальний елемент " + maxVal + " в A[0][0]):");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 System.out.printf("%8.2f ", A[i][j]);
             }
             System.out.println();
         }
-
-        System.out.println("\nВектор B (середні значення елементів рядків):");
-        for (int i = 0; i < n; i++) {
-            System.out.printf("B[%d] = %.2f\n", i, B[i]);
-        }
     }
 
-    // ЗАВДАННЯ 4: Обробка рядків
+    // ЗАВДАННЯ 4 (Варіант 4)
     public static void runTask4(Scanner scanner) {
-        System.out.println("\n ЗАВДАННЯ 4 ");
+        System.out.println("\n--- ЗАВДАННЯ 4 (Варіант 4) ---");
         System.out.println("Введіть текст:");
-        
         String text = scanner.nextLine();
 
         StringBuilder result = new StringBuilder();
@@ -192,7 +199,7 @@ public class Main {
             result.append(processWord(currentWord.toString()));
         }
 
-        System.out.println("\nОброблений текст (вилучено повторні входження першої літери):");
+        System.out.println("\nОброблений текст:");
         System.out.println(result.toString());
     }
 
