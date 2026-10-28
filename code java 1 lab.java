@@ -13,7 +13,6 @@ public class Main {
             System.out.println("1. Завдання 1 (Варіант 9: Обчислення виразу)");
             System.out.println("2. Завдання 2 (Варіант 10: Симетрична різниця масивів A і B)");
             System.out.println("3. Завдання 3 (Варіант 3: Перестановка max елемента в A[0][0])");
-            System.out.println("4. Завдання 4 (Варіант 4: Обробка тексту)");
             System.out.println("0. Вихід");
             System.out.print("Ваш вибір: ");
 
@@ -29,9 +28,6 @@ public class Main {
                     break;
                 case 3:
                     runTask3(scanner);
-                    break;
-                case 4:
-                    runTask4(scanner);
                     break;
                 case 0:
                     System.out.println("Роботу завершено!");
@@ -145,7 +141,7 @@ public class Main {
             }
         }
 
-        // Перестановка рядка maxRow з 0-м рядком
+        // Перестановка рядків
         if (maxRow != 0) {
             for (int j = 0; j < n; j++) {
                 double temp = A[0][j];
@@ -154,7 +150,7 @@ public class Main {
             }
         }
 
-        // Перестановка стовпчика maxCol з 0-м стовпчиком
+        // Перестановка стовпчиків
         if (maxCol != 0) {
             for (int i = 0; i < n; i++) {
                 double temp = A[i][0];
@@ -170,55 +166,5 @@ public class Main {
             }
             System.out.println();
         }
-    }
-
-    // ЗАВДАННЯ 4 (Варіант 4)
-    public static void runTask4(Scanner scanner) {
-        System.out.println("\n--- ЗАВДАННЯ 4 (Варіант 4) ---");
-        System.out.println("Введіть текст:");
-        String text = scanner.nextLine();
-
-        StringBuilder result = new StringBuilder();
-        StringBuilder currentWord = new StringBuilder();
-
-        for (int i = 0; i < text.length(); i++) {
-            char ch = text.charAt(i);
-
-            if (Character.isLetterOrDigit(ch)) {
-                currentWord.append(ch);
-            } else {
-                if (currentWord.length() > 0) {
-                    result.append(processWord(currentWord.toString()));
-                    currentWord.setLength(0);
-                }
-                result.append(ch);
-            }
-        }
-
-        if (currentWord.length() > 0) {
-            result.append(processWord(currentWord.toString()));
-        }
-
-        System.out.println("\nОброблений текст:");
-        System.out.println(result.toString());
-    }
-
-    private static String processWord(String word) {
-        if (word.isEmpty()) return word;
-
-        char firstChar = word.charAt(0);
-        char firstCharLower = Character.toLowerCase(firstChar);
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(firstChar);
-
-        for (int i = 1; i < word.length(); i++) {
-            char currentChar = word.charAt(i);
-            if (Character.toLowerCase(currentChar) != firstCharLower) {
-                sb.append(currentChar);
-            }
-        }
-
-        return sb.toString();
     }
 }
